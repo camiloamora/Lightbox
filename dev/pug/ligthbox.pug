@@ -1,3 +1,10 @@
 extends templates/template
 block main
     h1 Ligthbox gallery
+    .gallery-container#gallery-container
+        - var n = 1
+        while n < 5
+            .gallery-item
+                img(src="img/gallery-" + n + "-thumb.jpg" alt="Descripción de la imagen " + n)
+                -n++
+    script(src='js/lightbox.js')
