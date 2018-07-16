@@ -1,10 +1,10 @@
 import gulp from 'gulp';
-import plumber from 'gulp-plumber';
 import pug from 'gulp-pug';
 import browserSync from 'browser-sync';
 import sass from 'gulp-sass';
 import postcss from 'gulp-postcss';
 import cssnano from 'cssnano';
+import babel from 'gulp-babel';
 
 const server = browserSync.create();
 
