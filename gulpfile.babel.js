@@ -43,8 +43,7 @@ gulp.task('default', () => {
         }
     });
 
-    gulp.watch('./dev/js/*.js', ['es6', server.reload]);
-    gulp.watch('./dev/scss/**/*.scss', ['pug', server.reload]);
-    gulp.watch('./dev/pug/**/*.pug', ['pug', server.reload]);
-
+    watch('./dev/scss/**/*.scss', () => gulp.start('sass'));
+    watch('./dev/js/**/*.js', () => gulp.start('es6',server.reload) );
+    watch('./dev/pug/**/*.pug', () => gulp.start('pug', server.reload) );
 });

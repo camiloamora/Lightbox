@@ -39,9 +39,33 @@ var openLightboxEvent = function openLightboxEvent(container, gallery, larges, d
 var openLightbox = function openLightbox(gallery, i, larges, descriptions) {
     //abrir lightbox al pulsar el parametro image
     var lightboxElement = document.createElement('div');
-    lightboxElement.innerHTML = '\n        <div class="lightbox-overlay">\n            <figure class="lightbox-container">\n                <img src="' + larges[i] + '" class="lightbox-image">\n                <figcaption>\n                    <p class="lightbox-description">' + descriptions[i] + '</p>\n                    <nav class="lightbox-navigation">\n                        <a href="#" class="lightbox-navigation__button prev"></a>\n                            <span class="lightbox"-navigation__counter> Imagen ' + (i + 1) + ' de ' + gallery.length + '</span>\n                        <a href="#" class="lightbox-navigation__button next"></a>\n                    </nav>\n                </figcaption>\n            </figure>\n        </div>\n    ';
+    lightboxElement.innerHTML = '\n        <div class="lightbox-overlay">\n            <figure class="lightbox-container">\n                <div class="close-modal">x</div>\n                <img src="' + larges[i] + '" class="lightbox-image">\n                <figcaption>\n                    <p class="lightbox-description">' + descriptions[i] + '</p>\n                    <nav class="lightbox-navigation">\n                        <a href="#" class="lightbox-navigation__button prev"><<</a>\n                            <span class="lightbox"-navigation__counter> Imagen ' + (i + 1) + ' de ' + gallery.length + '</span>\n                        <a href="#" class="lightbox-navigation__button next">>></a>\n                    </nav>\n                </figcaption>\n            </figure>\n        </div>\n    ';
     lightboxElement.id = 'lightbox';
     document.body.appendChild(lightboxElement);
+    closeModal(lightboxElement);
+    navigateLightbox(lightboxElement, i, larges, descriptions);
+};
+
+var navigateLightbox = function navigateLightbox(lightboxElement, i, larges, descriptions) {
+    var prevButton = lightboxElement.querySelector('.prev'),
+        nextButton = lightboxElement.querySelector('.next'),
+        image = lightboxElement.querySelector('img'),
+        description = lightboxElement.querySelector('p'),
+        counter = lightboxElement.querySelector('span');
+    lightboxElement.addEventListener('click', function (e) {
+        console.log(image);
+        e.preventDefault();
+        image.src = larges[i + 1];
+        i++;
+    });
+};
+
+var closeModal = function closeModal(modalElement) {
+    var closeModal = modalElement.querySelector('.close-modal');
+    closeModal.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.removeChild(modalElement);
+    });
 };
 
 var lightbox = function lightbox(container) {
